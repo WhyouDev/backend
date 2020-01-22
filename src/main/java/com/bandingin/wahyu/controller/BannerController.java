@@ -30,30 +30,34 @@ public class BannerController {
 	@Autowired
 	BannerService bannerService;
 	
-	@GetMapping("/list/banners")
-	@JsonView(DataTablesOutput.View.class)
-	public DataTablesOutput<Banner> listAll(@Valid DataTablesInput input){
-		return bannerService.listAll(input);
-	}
-	@GetMapping("/banners")
+	@GetMapping("/banner")
 	public Iterable<Banner> getAll(){
-		return bannerService.getAll();
-	}
-	@GetMapping("/banner/{id}")
-	public Optional<Banner> getById(@PathVariable("id") Integer id){
-		return bannerService.getById(id);
-	}
-	@PostMapping("/banner")
-	public Banner insert (@RequestBody Banner banner) {
-		return bannerService.insert(banner);
-	}
-	@PutMapping("/banner/{id}")
-	public Banner update(@PathVariable("id") Integer id, @RequestBody Banner banner) {
-		return bannerService.update(id, banner);
-	}
+        return bannerService.getAll();
+    }
 	
-	@DeleteMapping("/banner/{id}")
-	public ResponseEntity<?> delete(@PathVariable("id") Integer id){
-		return bannerService.delete(id);
-	}
+	@JsonView(DataTablesOutput.View.class)
+    @GetMapping("/list/banner")
+    public DataTablesOutput<Banner> getBanners(@Valid DataTablesInput input) {
+        return bannerService.listAjaxBanner(input);
+    }
+ 
+    @GetMapping("/banner/{id}")
+    public Optional<Banner> getById(@PathVariable("id") Integer id){
+        return bannerService.findById(id);
+    }
+   
+    @PostMapping("/banner")
+    public Banner addBanner(@RequestBody Banner banner) {
+        return bannerService.insert(banner);
+    }
+   
+    @PutMapping("/banner/{id}")
+    public Banner updateBanner(@PathVariable("id") Integer id, @RequestBody Banner banner) {
+        return bannerService.update(id, banner);
+    }
+   
+    @DeleteMapping("/banner/{id}")
+    public ResponseEntity<?> deleteBanner(@PathVariable Integer id){
+        return bannerService.deleteBanner(id);
+    }
 }

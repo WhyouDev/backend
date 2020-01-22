@@ -23,7 +23,7 @@ import com.bandingin.wahyu.model.Product;
 import com.bandingin.wahyu.service.ProductService;
 import com.fasterxml.jackson.annotation.JsonView;
 
-@CrossOrigin(origins="*", maxAge = 3600)
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api")
 public class ProductController {
@@ -36,6 +36,7 @@ public class ProductController {
 	public DataTablesOutput<Product> listAll(@Valid DataTablesInput input){
 		return productService.listAll(input);	
 	}
+	
 	@GetMapping("/products")
 	public Iterable<Product> getAll(){
 		return productService.getAll();
@@ -47,7 +48,7 @@ public class ProductController {
 	}
 	
 	@PostMapping("/product")
-	public Product insert(@RequestBody Product product) {
+	public Product insert (@RequestBody Product product) {
 		return productService.insert(product);
 	}
 	
@@ -56,7 +57,7 @@ public class ProductController {
 		return productService.update(id, product);
 	}
 	
-	@DeleteMapping("//{id}")
+	@DeleteMapping("/product/{id}")
 	public ResponseEntity<?> delete(@PathVariable("id") Integer id){
 		return productService.delete(id);
 	}

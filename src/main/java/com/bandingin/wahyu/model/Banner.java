@@ -1,5 +1,7 @@
 package com.bandingin.wahyu.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -16,32 +18,32 @@ import com.fasterxml.jackson.annotation.JsonView;
 @Entity
 @Table(name ="banner")
 @EntityListeners(AuditingEntityListener.class)
-public class Banner {
+public class Banner implements Serializable{
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonView(DataTablesOutput.View.class)
 	@Column(name = "id", nullable = false, unique = true)
     private int id;
 	
-	@Column(name = "title", length = 120)
+	@Column(name = "banner_name", length = 200)
     @JsonView(DataTablesOutput.View.class)
-    private String title;
+    private String banner_name;
 	
-	@Column (name= "description", columnDefinition="TEXT")
+	@Column(name = "banner_image", columnDefinition="TEXT")
+    @JsonView(DataTablesOutput.View.class)
+    private String banner_image;
+	
+	@Column(name = "banner_link", columnDefinition="TEXT")
+    @JsonView(DataTablesOutput.View.class)
+    private String banner_link;
+	
+	@Column (name= "banner_desc", columnDefinition="TEXT")
 	@JsonView (DataTablesOutput.View.class)
-	private String description;
+	private String banner_desc;
 	
-	@Column(name = "button_name", length = 120)
+	@Column(name = "banner_alt", columnDefinition="TEXT")
     @JsonView(DataTablesOutput.View.class)
-    private String button_name;
-	
-	@Column(name = "button_link", length = 120)
-    @JsonView(DataTablesOutput.View.class)
-    private String button_link;
-	
-	@Column(name = "image", columnDefinition="TEXT")
-    @JsonView(DataTablesOutput.View.class)
-    private String image;
+    private String banner_alt;
 
 	public int getId() {
 		return id;
@@ -51,45 +53,43 @@ public class Banner {
 		this.id = id;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getBanner_name() {
+		return banner_name;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setBanner_name(String banner_name) {
+		this.banner_name = banner_name;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getBanner_image() {
+		return banner_image;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setBanner_image(String banner_image) {
+		this.banner_image = banner_image;
 	}
 
-	public String getButton_name() {
-		return button_name;
+	public String getBanner_link() {
+		return banner_link;
 	}
 
-	public void setButton_name(String button_name) {
-		this.button_name = button_name;
+	public void setBanner_link(String banner_link) {
+		this.banner_link = banner_link;
 	}
 
-	public String getButton_link() {
-		return button_link;
+	public String getBanner_desc() {
+		return banner_desc;
 	}
 
-	public void setButton_link(String button_link) {
-		this.button_link = button_link;
+	public void setBanner_desc(String banner_desc) {
+		this.banner_desc = banner_desc;
 	}
 
-	public String getImage() {
-		return image;
+	public String getBanner_alt() {
+		return banner_alt;
 	}
 
-	public void setImage(String image) {
-		this.image = image;
+	public void setBanner_alt(String banner_alt) {
+		this.banner_alt = banner_alt;
 	}
-	
-	
 }
