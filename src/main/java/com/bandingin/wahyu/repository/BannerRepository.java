@@ -5,5 +5,6 @@ import org.springframework.data.jpa.datatables.repository.DataTablesRepository;
 import com.bandingin.wahyu.model.Banner;
 
 public interface BannerRepository extends DataTablesRepository<Banner, Integer> {
-//	Banner findByStack(Integer stack);
+
+	Banner findByStack(Integer stack);
 }

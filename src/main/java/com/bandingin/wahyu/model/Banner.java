@@ -25,6 +25,10 @@ public class Banner implements Serializable{
 	@Column(name = "id", nullable = false, unique = true)
     private int id;
 	
+	@Column(name="stack")
+	@JsonView(DataTablesOutput.View.class)
+	private Integer stack;
+	
 	@Column(name = "banner_name", length = 200)
     @JsonView(DataTablesOutput.View.class)
     private String banner_name;
@@ -44,6 +48,16 @@ public class Banner implements Serializable{
 	@Column(name = "banner_alt", columnDefinition="TEXT")
     @JsonView(DataTablesOutput.View.class)
     private String banner_alt;
+	
+	
+
+	public Integer getStack() {
+		return stack;
+	}
+
+	public void setStack(Integer stack) {
+		this.stack = stack;
+	}
 
 	public int getId() {
 		return id;

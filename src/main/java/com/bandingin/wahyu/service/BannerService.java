@@ -17,11 +17,6 @@ public class BannerService {
 	@Autowired
 	BannerRepository bannerRepository;
 	
-	
-	public Banner insert(Banner banner) {
-		return bannerRepository.save(banner);
-	}
-	
 	public Iterable<Banner> getAll(){
 		return bannerRepository.findAll();
 	}
@@ -30,27 +25,36 @@ public class BannerService {
         return bannerRepository.findAll(input);
     }
 	
-//	public Banner getByStack(Integer stack) {
-//		try {
-//			throw new ResourceNotFoundException("Banner Settings", "Stack not found", stack);
-//		}catch(Exception s) {
-//			return BannerRepository.findByStack(stack);
-//		}
-//	}
-//	
+	public Banner getByStack(Integer stack) {
+		try {
+			throw new ResourceNotFoundException("Banner Settings", "Stack not found", stack);
+		}catch(Exception s) {
+			return bannerRepository.findByStack(stack);
+		}
+	}
+	
+	public Banner insert(Banner banner) {
+		return bannerRepository.save(banner);
+	}
+	
 	public Optional<Banner> findById(Integer id){
         return bannerRepository.findById(id);
     }
 	
-	public Banner update(Integer id, Banner banner) {
-		Banner br = bannerRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Data not found", "id", id));
+	public Banner update(Integer stack, Banner banner) {
+		Banner br = bannerRepository.findByStack(stack);
+		if(br != null) {
 		br.setBanner_name(banner.getBanner_name());
 		br.setBanner_image(banner.getBanner_image());
 		br.setBanner_link(banner.getBanner_link());
 		br.setBanner_desc(banner.getBanner_desc());
 		br.setBanner_alt(banner.getBanner_alt());
+		br.setStack(banner.getStack());
 		Banner update = bannerRepository.save(br);
 		return update;
+		}else {
+			throw new ResourceNotFoundException("Banner", "Status not found", br.getStack());
+		}
 	}
 	public ResponseEntity<?> deleteBanner(Integer id){
 		Banner banner = bannerRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Banner", "id", id));

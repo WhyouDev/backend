@@ -45,15 +45,20 @@ public class BannerController {
     public Optional<Banner> getById(@PathVariable("id") Integer id){
         return bannerService.findById(id);
     }
+    
+    @GetMapping("/banners/{stack}")
+    public Banner getByStack(@PathVariable("stack") Integer stack){
+        return bannerService.getByStack(stack);
+    }
    
     @PostMapping("/banner")
     public Banner addBanner(@RequestBody Banner banner) {
         return bannerService.insert(banner);
     }
    
-    @PutMapping("/banner/{id}")
-    public Banner updateBanner(@PathVariable("id") Integer id, @RequestBody Banner banner) {
-        return bannerService.update(id, banner);
+    @PutMapping("/banner/{stack}")
+    public Banner updateBanner(@PathVariable("stack") Integer stack, @RequestBody Banner banner) {
+        return bannerService.update(stack, banner);
     }
    
     @DeleteMapping("/banner/{id}")
